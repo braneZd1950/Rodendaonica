@@ -40,6 +40,14 @@ export function createApp() {
     res.json({ ok: true, service: 'rodendaonica-api', database: 'mongodb' })
   })
 
+  app.get('/', (_req, res) => {
+    res.json({
+      ok: true,
+      service: 'rodendaonica-api',
+      health: '/api/health',
+    })
+  })
+
   app.use('/api/auth', authRoutes)
   app.use('/api/venues', venueRoutes)
   app.use('/api/parents', parentRoutes)

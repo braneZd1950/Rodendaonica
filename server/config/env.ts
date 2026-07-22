@@ -9,7 +9,10 @@ function required(name: string, fallback?: string): string {
 export const env = {
   port: Number(process.env.PORT ?? 3000),
   mongoUri: required('MONGO_URI'),
-  /** Automatski pokreni seed ako je baza prazna (korisno uz MONGO_URI=memory). */
+  /**
+   * Učitaj demo podatke (Ana / partner) ako je baza prazna.
+   * Na Renderu postavite AUTO_SEED=true za prvi deploy.
+   */
   autoSeed: process.env.AUTO_SEED === 'true',
   jwtSecret: required('JWT_SECRET', 'dev-secret-promijeni-u-produkciji'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '7d',
