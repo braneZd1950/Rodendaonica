@@ -13,7 +13,9 @@ export const env = {
   autoSeed: process.env.AUTO_SEED === 'true',
   jwtSecret: required('JWT_SECRET', 'dev-secret-promijeni-u-produkciji'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '7d',
-  corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
+  corsOrigin:
+    process.env.CORS_ORIGIN ??
+    'http://localhost:5173,https://rodendaonica.onrender.com',
   stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? '',
   stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY ?? '',
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? '',
