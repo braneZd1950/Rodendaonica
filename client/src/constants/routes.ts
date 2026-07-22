@@ -1,0 +1,33 @@
+/** Centralizirane rute — jedan izvor istine za navigaciju i linkove. */
+export const ROUTES = {
+  home: '/',
+  venues: '/igraonice',
+  venueDetail: (slug: string) => `/igraonice/${slug}`,
+  howItWorks: '/kako-funkcionira',
+  pricing: '/cijene',
+  forParents: '/za-roditelje',
+  forBusiness: '/za-igraonice',
+  book: '/rezerviraj',
+  terms: '/uvjeti',
+  privacy: '/privatnost',
+  cookies: '/kolacici',
+  login: '/prijava',
+  register: '/registracija',
+  forgotPassword: '/zaboravljena-lozinka',
+  resetPassword: '/reset-lozinke',
+  logout: '/odjava',
+  parent: {
+    profile: '/profil',
+    reservations: '/rezervacije',
+    messages: '/poruke',
+  },
+  business: {
+    dashboard: '/dashboard',
+    calendar: '/kalendar',
+    reservations: '/poslovne-rezervacije',
+    messages: '/poslovne-poruke',
+    reviews: '/recenzije',
+    settings: '/postavke-igraonice',
+    catalog: '/postavke-igraonice/katalog',
+  },
+} as const

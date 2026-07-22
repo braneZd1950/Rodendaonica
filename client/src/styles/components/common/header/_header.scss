@@ -1,0 +1,607 @@
+// ─────────────────────────────────────────
+// Header — modern glass + audience chips
+// ─────────────────────────────────────────
+@use "../../../abstracts/_variables.scss" as *;
+
+$header-blur: 20px;
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: $z-index-header;
+    width: 100%;
+
+    // Dekorativni slojevi
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba($color-neutral-0, 0.72);
+        backdrop-filter: blur($header-blur) saturate(1.4);
+        -webkit-backdrop-filter: blur($header-blur) saturate(1.4);
+        border-bottom: 1px solid rgba($color-primary-200, 0.45);
+        z-index: 0;
+    }
+
+    &__glow {
+        position: absolute;
+        inset: auto 0 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            $color-primary-400 20%,
+            $color-secondary-400 50%,
+            $color-accent-400 80%,
+            transparent 100%
+        );
+        opacity: 0.85;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: $space-4;
+        height: $header-height-desktop;
+        padding: 0 clamp($space-4, 4vw, $space-10);
+        max-width: $container-max-width;
+        margin: 0 auto;
+
+        @media (max-width: $bp-md) {
+            height: $header-height-mobile;
+            padding: 0 $space-4;
+        }
+
+        @media (max-width: $bp-xs) {
+            gap: $space-2;
+            padding: 0 $space-3;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        margin-left: auto;
+        flex-shrink: 0;
+
+        @media (max-width: $bp-xs) {
+            gap: $space-1;
+        }
+    }
+
+    // ── LOGO ──
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: $space-3;
+        text-decoration: none;
+        flex-shrink: 0;
+        transition: transform $transition-spring;
+
+        &:hover {
+            transform: translateY(-1px);
+
+            .header__logo-mark {
+                box-shadow: $shadow-primary-md;
+            }
+        }
+    }
+
+    &__logo-mark {
+        display: flex;
+        width: 42px;
+        height: 42px;
+        border-radius: $radius-lg;
+        overflow: hidden;
+        box-shadow: $shadow-primary-sm;
+        transition: box-shadow $transition-base;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        @media (max-width: $bp-md) {
+            width: 38px;
+            height: 38px;
+        }
+
+        @media (max-width: $bp-xs) {
+            width: 34px;
+            height: 34px;
+        }
+    }
+
+    &__logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+    }
+
+    &__logo-main {
+        font-family: $font-family-heading;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, $color-primary-600 0%, $color-secondary-500 55%, $color-primary-500 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        @media (max-width: $bp-md) {
+            font-size: $font-size-md;
+        }
+
+        @media (max-width: $bp-xs) {
+            font-size: 1rem;
+        }
+    }
+
+    &__logo-sub {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        letter-spacing: 0.01em;
+        margin-top: 2px;
+
+        @media (max-width: $bp-sm) {
+            display: none;
+        }
+    }
+
+    // ── NAVIGACIJA ──
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+
+        &--center {
+            flex: 1;
+            justify-content: center;
+            padding: 0 $space-2;
+
+            @media (max-width: $bp-lg) {
+                display: none;
+            }
+        }
+
+        &--right {
+            justify-content: flex-end;
+            gap: $space-2;
+
+            @media (max-width: 860px) {
+                gap: $space-1;
+            }
+
+            @media (max-width: $bp-md) {
+                display: none;
+            }
+        }
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-2;
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: $radius-full;
+        transition:
+            color $transition-base,
+            background-color $transition-base,
+            box-shadow $transition-base,
+            transform $transition-fast;
+
+        line-height: 1.2;
+    }
+
+    // Default pill linkovi
+    &__link--default {
+        padding: $space-2 $space-4;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+
+        &:hover {
+            color: $color-primary-600;
+            background: rgba($color-primary-100, 0.65);
+        }
+    }
+
+    @media (max-width: 1190px) {
+        &__link--default,
+        &__link--ghost,
+        &__link--audience-parent,
+        &__link--audience-business,
+        &__cta {
+            font-size: $font-size-xs !important;
+            padding-inline: $space-3 !important;
+        }
+
+    }
+
+    @media (max-width: 1024px) {
+        &__logo-sub {
+            display: none;
+        }
+
+        &__link--audience-parent,
+        &__link--audience-business {
+            padding-inline: $space-2 !important;
+        }
+    }
+
+    &__link--active.header__link--default {
+        color: $color-primary-700;
+        background: linear-gradient(135deg, rgba($color-primary-100, 0.9), rgba($color-secondary-50, 0.8));
+        box-shadow: inset 0 0 0 1px rgba($color-primary-300, 0.5);
+    }
+
+    // Roditelji — topli ružičasto-ljubičasti ton
+    &__link--audience-parent {
+        padding: $space-2 $space-4;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-secondary-700;
+        background: linear-gradient(135deg, $color-secondary-50, rgba($color-primary-50, 0.9));
+        border: 1px solid rgba($color-secondary-300, 0.55);
+        box-shadow: $shadow-secondary-sm;
+
+        &:hover {
+            color: $color-secondary-800;
+            transform: translateY(-1px);
+            box-shadow: $shadow-secondary-md;
+        }
+    }
+
+    &__link--active.header__link--audience-parent {
+        background: linear-gradient(135deg, $color-secondary-100, $color-primary-100);
+        border-color: $color-secondary-400;
+    }
+
+    // Igraonice — profesionalniji tirkizno-ljubičasti
+    &__link--audience-business {
+        padding: $space-2 $space-4;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-success-700;
+        background: linear-gradient(135deg, $color-success-50, rgba($color-info-50, 0.85));
+        border: 1px solid rgba($color-success-300, 0.5);
+        box-shadow: 0 4px 14px rgba($color-success-500, 0.15);
+
+        &:hover {
+            color: $color-success-700;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba($color-success-500, 0.22);
+        }
+    }
+
+    &__link--active.header__link--audience-business {
+        background: linear-gradient(135deg, $color-success-100, $color-info-50);
+        border-color: $color-success-400;
+    }
+
+    // Ghost prijava
+    &__link--ghost {
+        padding: $space-2 $space-4;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+        border: 1.5px solid $color-border;
+
+        &:hover {
+            border-color: $color-primary-300;
+            color: $color-primary-600;
+            background: $color-primary-50;
+        }
+    }
+
+    // Glavni CTA
+    &__cta {
+        position: relative;
+        overflow: hidden;
+        padding: $space-2 $space-5 !important;
+        font-size: $font-size-sm !important;
+        font-weight: $font-weight-bold !important;
+        color: $color-neutral-0 !important;
+        background: linear-gradient(135deg, $color-primary-500 0%, $color-secondary-500 50%, $color-primary-600 100%) !important;
+        background-size: 200% 200% !important;
+        border: none !important;
+        box-shadow: $shadow-primary-md;
+        letter-spacing: 0.01em;
+
+        &:hover {
+            color: $color-neutral-0 !important;
+            background-position: 100% 50% !important;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba($color-primary-500, 0.4);
+        }
+
+    }
+
+    // ── HAMBURGER ──
+    &__hamburger {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid $color-border-light;
+        border-radius: $radius-lg;
+        background: rgba($color-neutral-0, 0.9);
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        box-shadow: $shadow-sm;
+        transition:
+            border-color $transition-base,
+            box-shadow $transition-base;
+
+        @media (max-width: $bp-md) {
+            display: flex;
+        }
+
+        &:hover {
+            border-color: $color-primary-300;
+            box-shadow: $shadow-primary-sm;
+        }
+
+        span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, $color-primary-500, $color-secondary-500);
+            border-radius: $radius-full;
+            transition:
+                transform $transition-slow,
+                opacity $transition-slow;
+            transform-origin: center;
+        }
+
+        &--open {
+            border-color: $color-primary-300;
+            background: $color-primary-50;
+
+            span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            span:nth-child(2) {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+        }
+    }
+
+    // ── MOBILNI OVERLAY + DRAWER ──
+    &__mobile-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        top: $header-height-mobile + 4px;
+        background: rgba($color-neutral-900, 0.35);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $transition-slow;
+        z-index: $z-index-dropdown;
+
+        @media (max-width: $bp-md) {
+            display: block;
+        }
+
+        &--open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    &__mobile-drawer {
+        display: none;
+        position: fixed;
+        top: $header-height-mobile + 4px;
+        right: 0;
+        bottom: 0;
+        width: min(100%, 360px);
+        padding: $space-5;
+        background: linear-gradient(180deg, $color-neutral-0 0%, $color-primary-50 120%);
+        border-left: 1px solid rgba($color-primary-200, 0.5);
+        box-shadow: -12px 0 40px rgba($color-primary-900, 0.12);
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform $transition-slow cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: $z-index-sticky;
+
+        @media (max-width: $bp-md) {
+            display: flex;
+            flex-direction: column;
+            gap: $space-5;
+        }
+
+        @media (max-width: $bp-xs) {
+            width: 100%;
+            padding: $space-4;
+        }
+
+        &--open {
+            transform: translateX(0);
+        }
+
+        .header__link {
+            width: 100%;
+            padding: $space-3 $space-4;
+            border-radius: $radius-lg;
+            font-size: $font-size-base;
+            color: $color-text-primary;
+            border-bottom: none;
+            margin-bottom: $space-1;
+
+            &:hover {
+                background: rgba($color-primary-100, 0.5);
+            }
+        }
+
+        @media (max-width: $bp-xs) {
+            .header__link {
+                padding: $space-3;
+                font-size: $font-size-sm;
+            }
+        }
+
+        .header__link--active {
+            background: linear-gradient(135deg, $color-primary-100, $color-secondary-50);
+            color: $color-primary-700;
+            font-weight: $font-weight-semibold;
+        }
+    }
+
+    &__mobile-section {
+        display: flex;
+        flex-direction: column;
+        gap: $space-1;
+    }
+
+    &__mobile-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: $color-text-tertiary;
+        margin-bottom: $space-2;
+        padding-left: $space-2;
+
+        @media (max-width: $bp-xs) {
+            padding-left: $space-1;
+        }
+    }
+
+    &__mobile-audience {
+        display: grid;
+        gap: $space-3;
+    }
+
+    &__audience-card {
+        display: flex;
+        align-items: center;
+        gap: $space-4;
+        padding: $space-4;
+        border-radius: $radius-xl;
+        text-decoration: none;
+        transition:
+            transform $transition-base,
+            box-shadow $transition-base;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: $bp-xs) {
+            gap: $space-3;
+            padding: $space-3;
+        }
+
+        &--parent {
+            background: linear-gradient(135deg, $color-secondary-50, $color-primary-50);
+            border: 1px solid rgba($color-secondary-300, 0.6);
+            box-shadow: $shadow-secondary-sm;
+
+            strong {
+                color: $color-secondary-700;
+            }
+        }
+
+        &--business {
+            background: linear-gradient(135deg, $color-success-50, $color-info-50);
+            border: 1px solid rgba($color-success-300, 0.55);
+            box-shadow: 0 4px 14px rgba($color-success-500, 0.12);
+
+            strong {
+                color: $color-success-700;
+            }
+        }
+    }
+
+    &__audience-card-mark {
+        width: 4px;
+        align-self: stretch;
+        min-height: 2.75rem;
+        border-radius: $radius-full;
+        flex-shrink: 0;
+    }
+
+    &__audience-card--parent &__audience-card-mark {
+        background: linear-gradient(180deg, $color-secondary-400, $color-primary-500);
+    }
+
+    &__audience-card--business &__audience-card-mark {
+        background: linear-gradient(180deg, $color-success-400, $color-info-500);
+    }
+
+    &__audience-card-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        strong {
+            font-size: $font-size-base;
+            font-weight: $font-weight-bold;
+        }
+
+        small {
+            font-size: $font-size-xs;
+            color: $color-text-secondary;
+        }
+    }
+
+    &__mobile-cta {
+        margin-top: $space-2;
+        text-align: center;
+        justify-content: center;
+        color: $color-neutral-0 !important;
+        font-weight: $font-weight-bold !important;
+        background: linear-gradient(135deg, $color-primary-500, $color-secondary-500) !important;
+        border: none !important;
+        box-shadow: $shadow-primary-md !important;
+        padding: $space-4 !important;
+        border-radius: $radius-xl !important;
+
+        &:hover {
+            box-shadow: 0 12px 28px rgba($color-primary-500, 0.35) !important;
+        }
+
+        @media (max-width: $bp-xs) {
+            padding: $space-3 !important;
+            font-size: $font-size-sm !important;
+        }
+    }
+}
+
+@media (min-width: $bp-2xl) {
+    .header {
+        &__inner {
+            max-width: 1460px;
+            padding-inline: $space-12;
+        }
+
+        &__nav {
+            gap: $space-3;
+        }
+
+        &__link--default,
+        &__link--ghost,
+        &__link--audience-parent,
+        &__link--audience-business,
+        &__cta {
+            font-size: $font-size-base !important;
+            padding-top: $space-2;
+            padding-bottom: $space-2;
+        }
+    }
+}

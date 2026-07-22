@@ -1,0 +1,25 @@
+@use "./abstracts/_variables.scss" as vars;
+@use "./components/common/header/_header.scss";
+@use "./components/_consent-banner.scss";
+@use "./components/_payments.scss";
+@use "./pages/_auth.scss";
+@use "./pages/_landing.scss";
+@use "./pages/_venues.scss";
+@use "./pages/_parent-profile.scss";
+@use "./pages/_business-dashboard.scss";
+@use "./pages/_business-messages.scss";
+@use "./pages/_business-reviews.scss";
+@use "./pages/_business-catalog.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: vars.$font-family-base;
+  color: vars.$color-text-primary;
+  background-color: vars.$color-bg-secondary;
+}

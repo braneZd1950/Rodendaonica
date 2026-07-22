@@ -1,0 +1,282 @@
+@use "../abstracts/_variables.scss" as *;
+
+.parent-profile-page {
+    background:
+        radial-gradient(ellipse 70% 45% at 0% 0%, rgba($color-primary-100, 0.5), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 100% 5%, rgba($color-secondary-100, 0.35), transparent 50%),
+        $color-neutral-50;
+}
+
+.parent-profile {
+    padding: clamp($space-8, 5vw, $space-12) 0 $space-16;
+
+    &__loading {
+        margin: 0;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+    }
+
+    &__hero {
+        display: grid;
+        gap: $space-5;
+        margin-bottom: $space-8;
+        padding: clamp($space-6, 4vw, $space-8);
+        border-radius: $radius-2xl;
+        background: rgba($color-neutral-0, 0.9);
+        border: 1px solid rgba($color-neutral-0, 0.95);
+        box-shadow: 0 12px 40px rgba($color-primary-500, 0.08);
+
+        @media (min-width: $bp-md) {
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+        }
+    }
+
+    &__avatar {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-full;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0.04em;
+        color: $color-neutral-0;
+        background: linear-gradient(135deg, $color-primary-500, $color-secondary-500);
+        box-shadow: 0 8px 20px rgba($color-primary-500, 0.3);
+    }
+
+    &__eyebrow {
+        margin: 0 0 $space-2;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $color-primary-600;
+    }
+
+    &__intro h1 {
+        margin: 0 0 $space-3;
+        font-size: clamp($font-size-xl, 3.5vw, $font-size-2xl);
+        font-weight: $font-weight-bold;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    &__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-2;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+
+        span {
+            padding: $space-1 $space-3;
+            border-radius: $radius-full;
+            background: $color-neutral-50;
+            border: 1px solid $color-border-light;
+        }
+    }
+
+    &__hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-3;
+
+        @media (min-width: $bp-md) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: $space-5;
+
+        @media (max-width: $bp-lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        padding: $space-5 $space-6;
+        border-radius: $radius-xl;
+        background: $color-neutral-0;
+        border: 1px solid $color-border-light;
+        box-shadow: 0 4px 16px rgba($color-neutral-900, 0.04);
+
+        h2 {
+            margin: 0 0 $space-4;
+            font-size: $font-size-md;
+            font-weight: $font-weight-bold;
+            letter-spacing: -0.01em;
+        }
+
+        &--messages {
+            background: linear-gradient(145deg, $color-primary-50, rgba($color-secondary-50, 0.8));
+            border-color: rgba($color-primary-200, 0.6);
+
+            p {
+                margin: 0 0 $space-5;
+                font-size: $font-size-sm;
+                line-height: $line-height-relaxed;
+                color: $color-text-secondary;
+            }
+        }
+    }
+
+    &__card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $space-3;
+        margin-bottom: $space-4;
+
+        h2 {
+            margin: 0;
+        }
+    }
+
+    &__card-link {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-primary-600;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__empty {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+    }
+
+    &__children {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: $space-2;
+    }
+
+    &__children li {
+        padding: $space-3 $space-4;
+        border-radius: $radius-lg;
+        background: $color-neutral-50;
+        border: 1px solid $color-border-light;
+    }
+
+    &__child-name {
+        display: block;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+    }
+
+    &__child-meta {
+        display: block;
+        margin-top: 2px;
+        font-size: $font-size-xs;
+        color: $color-text-secondary;
+    }
+
+    &__venues,
+    &__reviews {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: $space-2;
+    }
+
+    &__venue,
+    &__review {
+        display: flex;
+        align-items: center;
+        gap: $space-3;
+        padding: $space-3 $space-4;
+        border-radius: $radius-lg;
+        background: $color-neutral-50;
+        border: 1px solid $color-border-light;
+        text-decoration: none;
+        color: inherit;
+        transition:
+            border-color $transition-base,
+            background-color $transition-base,
+            transform $transition-base;
+
+        &:hover {
+            border-color: rgba($color-primary-300, 0.6);
+            background: $color-primary-50;
+            transform: translateX(2px);
+        }
+    }
+
+    &__venue {
+        flex-wrap: wrap;
+    }
+
+    &__venue-name,
+    &__review-name {
+        flex: 1;
+        min-width: 0;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+    }
+
+    &__venue-meta {
+        font-size: $font-size-xs;
+        color: $color-text-secondary;
+        width: 100%;
+
+        @media (min-width: $bp-sm) {
+            width: auto;
+            flex: 1;
+        }
+    }
+
+    &__venue-arrow {
+        margin-left: auto;
+        font-size: $font-size-md;
+        color: $color-primary-500;
+    }
+
+    &__review-rating {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+        white-space: nowrap;
+    }
+
+    &__review-count {
+        font-weight: $font-weight-medium;
+        color: $color-text-tertiary;
+    }
+
+    &__messages-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: $space-3 $space-5;
+        border-radius: $radius-full;
+        background: $color-neutral-900;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-neutral-0;
+        text-decoration: none;
+        transition: background-color $transition-base;
+
+        &:hover {
+            background: $color-primary-700;
+        }
+    }
+}

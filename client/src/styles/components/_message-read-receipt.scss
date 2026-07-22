@@ -1,0 +1,41 @@
+@use "../abstracts/_variables.scss" as *;
+
+.msg-receipt {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 1;
+
+    &__icon {
+        width: 16px;
+        height: 11px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    &--primljena {
+        color: $color-text-tertiary;
+    }
+
+    &--isporucena {
+        color: $color-text-tertiary;
+    }
+
+    &--pogledana {
+        color: $color-primary-500;
+    }
+
+    &--on-primary {
+        &.msg-receipt--primljena,
+        &.msg-receipt--isporucena {
+            color: rgba($color-neutral-0, 0.72);
+        }
+
+        &.msg-receipt--pogledana {
+            color: $color-neutral-0;
+        }
+    }
+}

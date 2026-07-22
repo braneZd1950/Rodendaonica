@@ -1,0 +1,323 @@
+@use "../abstracts/_variables.scss" as *;
+
+.consent-banner__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1290;
+    background: rgba($color-neutral-900, 0.25);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.consent-banner {
+    position: fixed;
+    left: 50%;
+    bottom: calc($space-4 + env(safe-area-inset-bottom, 0px));
+    z-index: 1300;
+    width: min(520px, calc(100% - $space-6));
+    transform: translateX(-50%);
+
+    &__inner {
+        position: relative;
+        padding: $space-4 $space-5;
+        border-radius: $radius-xl;
+        border: 1px solid rgba($color-primary-200, 0.7);
+        background: rgba($color-neutral-0, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow:
+            0 4px 24px rgba($color-neutral-900, 0.08),
+            0 0 0 1px rgba($color-neutral-0, 0.5) inset;
+    }
+
+    &__head {
+        display: flex;
+        gap: $space-3;
+        margin-bottom: $space-3;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-lg;
+        font-size: 1.1rem;
+        background: $color-primary-50;
+    }
+
+    &__title {
+        margin: 0 0 2px;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+    }
+
+    &__text {
+        margin: 0;
+        font-size: $font-size-xs;
+        line-height: 1.45;
+        color: $color-text-secondary;
+
+        a {
+            color: $color-primary-600;
+            font-weight: $font-weight-semibold;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__legal {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-2 $space-3;
+        margin-bottom: $space-3;
+
+        @media (max-width: $bp-sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__check {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        cursor: pointer;
+        user-select: none;
+
+        span:last-child {
+            line-height: 1.3;
+        }
+    }
+
+    &__expand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: $space-2;
+        padding: $space-2 $space-3;
+        border: 1px solid $color-border-light;
+        border-radius: $radius-md;
+        background: $color-neutral-50;
+        font-family: inherit;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-text-secondary;
+        cursor: pointer;
+        transition:
+            background-color $transition-base,
+            border-color $transition-base,
+            color $transition-base;
+
+        &:hover {
+            border-color: $color-primary-300;
+            color: $color-primary-700;
+            background: $color-primary-50;
+        }
+
+        &--open {
+            margin-bottom: $space-3;
+            border-color: rgba($color-primary-300, 0.5);
+            background: $color-primary-50;
+            color: $color-primary-700;
+        }
+    }
+
+    &__expand-icon {
+        width: 8px;
+        height: 8px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg);
+        transition: transform $transition-base;
+
+        .consent-banner__expand--open & {
+            transform: rotate(-135deg);
+        }
+    }
+
+    &__cookies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-2;
+        margin-bottom: $space-3;
+        padding: $space-3;
+        border-radius: $radius-md;
+        background: $color-neutral-50;
+        border: 1px solid $color-border-light;
+    }
+
+    &__cookie {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-2;
+        padding: $space-1 $space-2 $space-1 $space-1;
+        border-radius: $radius-full;
+        background: $color-neutral-0;
+        border: 1px solid $color-border-light;
+        font-size: 0.6875rem;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        cursor: pointer;
+        user-select: none;
+
+        &--locked {
+            opacity: 0.75;
+            cursor: default;
+        }
+    }
+
+    &__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    &__track {
+        position: relative;
+        flex-shrink: 0;
+        width: 32px;
+        height: 18px;
+        border-radius: $radius-full;
+        border: 1px solid $color-border;
+        background: $color-neutral-200;
+        transition:
+            background-color $transition-base,
+            border-color $transition-base;
+    }
+
+    &__thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: $radius-full;
+        background: $color-neutral-0;
+        box-shadow: $shadow-sm;
+        transition: transform $transition-base;
+    }
+
+    &__input:checked + &__track {
+        background: $color-primary-500;
+        border-color: transparent;
+    }
+
+    &__input:checked + &__track &__thumb {
+        transform: translateX(14px);
+    }
+
+    &__input:focus-visible + &__track {
+        outline: 2px solid $color-primary-400;
+        outline-offset: 2px;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $space-2;
+    }
+
+    &__btn {
+        flex: 1;
+        padding: $space-2 $space-3;
+        border-radius: $radius-full;
+        font-family: inherit;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        cursor: pointer;
+        transition:
+            background-color $transition-base,
+            border-color $transition-base,
+            color $transition-base,
+            opacity $transition-base;
+        white-space: nowrap;
+
+        &--ghost {
+            border: 1px solid $color-border;
+            background: $color-neutral-0;
+            color: $color-text-primary;
+
+            &:hover:not(:disabled) {
+                border-color: $color-primary-300;
+                color: $color-primary-700;
+                background: $color-primary-50;
+            }
+        }
+
+        &--primary {
+            border: none;
+            background: $color-primary-600;
+            color: $color-neutral-0;
+
+            &:hover:not(:disabled) {
+                background: $color-primary-700;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: $space-3;
+        right: $space-3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: $radius-full;
+        background: $color-neutral-100;
+        font-family: inherit;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: $color-text-secondary;
+        cursor: pointer;
+        transition:
+            background-color $transition-base,
+            color $transition-base;
+
+        &:hover {
+            background: $color-neutral-200;
+            color: $color-text-primary;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary-400;
+            outline-offset: 2px;
+        }
+    }
+
+    &__hint {
+        margin: $space-2 0 0;
+        font-size: 0.625rem;
+        line-height: 1.45;
+        text-align: center;
+        color: $color-text-tertiary;
+    }
+
+    &__hint-mark {
+        font-weight: $font-weight-semibold;
+        color: $color-text-secondary;
+    }
+}

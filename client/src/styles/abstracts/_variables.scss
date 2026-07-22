@@ -1,0 +1,218 @@
+// ─────────────────────────────────────────
+// _variables.scss
+// Design tokens — PartyPlay / Rođendaonica
+// ─────────────────────────────────────────
+
+// ── BRAND BOJE ──────────────────────────
+
+// Primary — ljubičasta
+$color-primary-50: #f3f0fd;
+$color-primary-100: #e4ddfa;
+$color-primary-200: #c9bbf5;
+$color-primary-300: #a992ee;
+$color-primary-400: #8a6be6;
+$color-primary-500: #6c5ce7; // ← glavna primary
+$color-primary-600: #5a4bd1;
+$color-primary-700: #4738b8;
+$color-primary-800: #362a96;
+$color-primary-900: #271f72;
+
+// Secondary — ružičasta
+$color-secondary-50: #fff0f6;
+$color-secondary-100: #ffe0ee;
+$color-secondary-200: #ffc2dd;
+$color-secondary-300: #ff9dc5;
+$color-secondary-400: #ff7aad;
+$color-secondary-500: #ff6b9d; // ← glavna secondary
+$color-secondary-600: #f04d86;
+$color-secondary-700: #d4306a;
+$color-secondary-800: #b01f52;
+$color-secondary-900: #8c123d;
+
+// Accent — žuta
+$color-accent-50: #fffceb;
+$color-accent-100: #fff8cc;
+$color-accent-200: #fff099;
+$color-accent-300: #ffe566;
+$color-accent-400: #ffd833;
+$color-accent-500: #ffd166; // ← glavna accent
+$color-accent-600: #e6b800;
+$color-accent-700: #b38f00;
+
+// Success — tirkizna
+$color-success-50: #e6faf7;
+$color-success-100: #b3f0e7;
+$color-success-200: #66dece;
+$color-success-300: #33d0be;
+$color-success-400: #00c4af;
+$color-success-500: #00bfa6; // ← success
+$color-success-600: #009e89;
+$color-success-700: #007d6d;
+
+// Info — plava
+$color-info-50: #e8f2fd;
+$color-info-100: #c2daf9;
+$color-info-200: #8dbef4;
+$color-info-300: #57a2ee;
+$color-info-400: #2d8de8;
+$color-info-500: #0984e3; // ← info
+$color-info-600: #076ec0;
+$color-info-700: #055899;
+
+// ── NEUTRALNE BOJE ───────────────────────
+
+$color-neutral-0: #ffffff;
+$color-neutral-50: #f5f6fa; // Light — pozadina
+$color-neutral-100: #eceef4;
+$color-neutral-200: #d8dbe8;
+$color-neutral-300: #b8bdd0;
+$color-neutral-400: #8f95b0;
+$color-neutral-500: #636e72; // Muted
+$color-neutral-600: #4a5568;
+$color-neutral-700: #374151;
+$color-neutral-800: #2d3436; // Dark
+$color-neutral-900: #1a1f2e;
+
+// ── SEMANTIČKE VARIJABLE ─────────────────
+
+$color-bg-primary: $color-neutral-0;
+$color-bg-secondary: $color-neutral-50;
+$color-bg-tertiary: $color-neutral-100;
+$color-bg-inverse: $color-neutral-800;
+
+$color-text-primary: $color-neutral-800;
+$color-text-secondary: $color-neutral-500;
+$color-text-tertiary: $color-neutral-300;
+$color-text-disabled: $color-neutral-200;
+$color-text-inverse: $color-neutral-0;
+$color-text-link: $color-primary-500;
+
+$color-border-light: $color-neutral-100;
+$color-border: $color-neutral-200;
+$color-border-strong: $color-neutral-300;
+
+// Error
+$color-error-light: #fee2e2;
+$color-error: #dc2626;
+$color-error-dark: #b91c1c;
+
+// Warning
+$color-warning-light: #fef9c3;
+$color-warning: $color-accent-500;
+$color-warning-dark: $color-accent-600;
+
+// ── TIPOGRAFIJA ──────────────────────────
+
+$font-family-base:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+$font-family-heading:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-md: 1.125rem; // 18px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 1.875rem; // 30px
+$font-size-3xl: 2.25rem; // 36px
+$font-size-4xl: 3rem; // 48px
+$font-size-5xl: 3.75rem; // 60px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.2;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+
+// ── SPACING ──────────────────────────────
+
+$space-1: 0.25rem; // 4px
+$space-2: 0.5rem; // 8px
+$space-3: 0.75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.25rem; // 20px
+$space-6: 1.5rem; // 24px
+$space-8: 2rem; // 32px
+$space-10: 2.5rem; // 40px
+$space-12: 3rem; // 48px
+$space-16: 4rem; // 64px
+$space-20: 5rem; // 80px
+$space-24: 6rem; // 96px
+
+// ── BORDER RADIUS ────────────────────────
+
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-2xl: 24px;
+$radius-full: 9999px;
+
+// ── SJENE ────────────────────────────────
+
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+$shadow-md:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+$shadow-lg:
+    0 10px 15px rgba(0, 0, 0, 0.08),
+    0 4px 6px rgba(0, 0, 0, 0.04);
+$shadow-xl:
+    0 20px 25px rgba(0, 0, 0, 0.08),
+    0 8px 10px rgba(0, 0, 0, 0.03);
+
+// Primary shadow — ljubičasta
+$shadow-primary-sm: 0 4px 14px rgba(108, 92, 231, 0.25);
+$shadow-primary-md: 0 8px 24px rgba(108, 92, 231, 0.35);
+
+// Secondary shadow — ružičasta
+$shadow-secondary-sm: 0 4px 14px rgba(255, 107, 157, 0.25);
+$shadow-secondary-md: 0 8px 24px rgba(255, 107, 157, 0.35);
+
+// ── BREAKPOINTI ──────────────────────────
+
+$bp-xs: 375px;
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+// ── LAYOUT ───────────────────────────────
+
+$container-max-width: 1280px;
+$container-padding-x: $space-6;
+
+$header-height-desktop: 72px;
+$header-height-mobile: 60px;
+
+// ── TRANZICIJE ───────────────────────────
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;
+$transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// ── Z-INDEX ──────────────────────────────
+
+$z-index-dropdown: 200;
+$z-index-sticky: 300;
+$z-index-header: 400;
+$z-index-modal: 500;
+$z-index-toast: 600;

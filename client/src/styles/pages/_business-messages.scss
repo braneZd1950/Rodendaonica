@@ -1,0 +1,459 @@
+@use "../abstracts/_variables.scss" as *;
+
+.biz-msg-page {
+    background:
+        radial-gradient(ellipse 70% 45% at 0% 0%, rgba($color-primary-100, 0.4), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 100% 5%, rgba($color-secondary-100, 0.28), transparent 50%),
+        $color-neutral-50;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.biz-msg {
+    padding: clamp($space-6, 4vw, $space-10) 0 $space-16;
+
+    &__hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: $space-4;
+        margin-bottom: $space-6;
+        padding: clamp($space-5, 3.5vw, $space-8);
+        border-radius: $radius-2xl;
+        background: rgba($color-neutral-0, 0.92);
+        border: 1px solid rgba($color-neutral-0, 0.95);
+        box-shadow: 0 12px 40px rgba($color-primary-500, 0.08);
+
+        h1 {
+            margin: 0 0 $space-2;
+            font-size: clamp($font-size-xl, 3vw, $font-size-2xl);
+            font-weight: $font-weight-bold;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            margin: 0;
+            font-size: $font-size-sm;
+            color: $color-text-secondary;
+            max-width: 36rem;
+        }
+    }
+
+    &__eyebrow {
+        margin: 0 0 $space-2;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $color-primary-600;
+    }
+
+    &__hero-stat {
+        display: grid;
+        gap: 2px;
+        padding: $space-3 $space-4;
+        border-radius: $radius-xl;
+        background: $color-primary-50;
+        border: 1px solid rgba($color-primary-200, 0.65);
+        text-align: center;
+
+        strong {
+            font-size: $font-size-xl;
+            font-weight: $font-weight-bold;
+            color: $color-primary-700;
+            line-height: 1;
+        }
+
+        span {
+            font-size: $font-size-xs;
+            color: $color-text-secondary;
+        }
+    }
+
+    &__layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+        gap: $space-4;
+        min-height: min(72vh, 680px);
+
+        @media (max-width: $bp-lg) {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
+    }
+
+    &__sidebar {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: $space-4;
+        border-radius: $radius-xl;
+        background: $color-neutral-0;
+        border: 1px solid $color-border-light;
+        box-shadow: 0 4px 16px rgba($color-neutral-900, 0.04);
+
+        @media (max-width: $bp-lg) {
+            max-height: 280px;
+        }
+    }
+
+    &__sidebar-label {
+        margin: 0 0 $space-3;
+        padding: 0 $space-2;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: $color-text-tertiary;
+    }
+
+    &__threads {
+        display: flex;
+        flex-direction: column;
+        gap: $space-2;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    &__thread {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: $space-3;
+        width: 100%;
+        padding: $space-3;
+        border: 1px solid transparent;
+        border-radius: $radius-lg;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+        transition:
+            background-color $transition-base,
+            border-color $transition-base,
+            box-shadow $transition-base;
+
+        &:hover {
+            background: $color-neutral-50;
+            border-color: $color-border-light;
+        }
+
+        &--active {
+            background: linear-gradient(145deg, $color-primary-50, rgba($color-secondary-50, 0.65));
+            border-color: rgba($color-primary-300, 0.65);
+            box-shadow: 0 4px 12px rgba($color-primary-500, 0.08);
+        }
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-full;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0.03em;
+        color: $color-neutral-0;
+        background: linear-gradient(135deg, $color-primary-500, $color-secondary-500);
+        box-shadow: 0 4px 10px rgba($color-primary-500, 0.22);
+
+        &--lg {
+            width: 48px;
+            height: 48px;
+            font-size: $font-size-sm;
+        }
+    }
+
+    &__thread-body {
+        flex: 1;
+        min-width: 0;
+        display: grid;
+        gap: 2px;
+    }
+
+    &__thread-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: $space-2;
+
+        strong {
+            font-size: $font-size-sm;
+            color: $color-text-primary;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        time {
+            flex-shrink: 0;
+            font-size: 0.6875rem;
+            color: $color-text-tertiary;
+        }
+    }
+
+    &__thread-venue {
+        font-size: 0.6875rem;
+        font-weight: $font-weight-semibold;
+        color: $color-primary-600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__thread-preview {
+        font-size: $font-size-xs;
+        color: $color-text-secondary;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__badge {
+        position: absolute;
+        top: $space-2;
+        right: $space-2;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-full;
+        font-size: 0.625rem;
+        font-weight: $font-weight-bold;
+        color: $color-neutral-0;
+        background: $color-primary-600;
+    }
+
+    &__chat {
+        display: flex;
+        flex-direction: column;
+        min-height: min(72vh, 680px);
+        border-radius: $radius-xl;
+        background: $color-neutral-0;
+        border: 1px solid $color-border-light;
+        box-shadow: 0 4px 16px rgba($color-neutral-900, 0.04);
+        overflow: hidden;
+
+        @media (max-width: $bp-lg) {
+            min-height: 480px;
+        }
+    }
+
+    &__chat-head {
+        display: flex;
+        align-items: center;
+        gap: $space-4;
+        padding: $space-4 $space-5;
+        border-bottom: 1px solid $color-border-light;
+        background: linear-gradient(180deg, rgba($color-primary-50, 0.45), transparent);
+
+        h2 {
+            margin: 0 0 2px;
+            font-size: $font-size-md;
+            font-weight: $font-weight-bold;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            margin: 0;
+            font-size: $font-size-xs;
+            color: $color-text-secondary;
+            line-height: 1.45;
+
+            a {
+                color: $color-primary-600;
+                text-decoration: none;
+                font-weight: $font-weight-medium;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__chat-intro {
+        min-width: 0;
+    }
+
+    &__chat-empty {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: $space-3;
+        padding: $space-8;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+    }
+
+    &__chat-empty-icon {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-full;
+        font-size: 1.5rem;
+        background: $color-neutral-50;
+        border: 1px dashed $color-border-light;
+    }
+
+    &__messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: $space-5;
+        display: flex;
+        flex-direction: column;
+        gap: $space-3;
+        background:
+            radial-gradient(circle at 20% 0%, rgba($color-primary-50, 0.35), transparent 45%),
+            $color-neutral-50;
+    }
+
+    &__bubble {
+        max-width: min(78%, 420px);
+        padding: $space-3 $space-4;
+        border-radius: $radius-xl;
+        box-shadow: 0 2px 8px rgba($color-neutral-900, 0.04);
+
+        p {
+            margin: 0;
+            font-size: $font-size-sm;
+            line-height: 1.5;
+            color: $color-text-primary;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        &--parent {
+            align-self: flex-start;
+            background: $color-neutral-0;
+            border: 1px solid $color-border-light;
+            border-bottom-left-radius: $radius-sm;
+        }
+
+        &--business {
+            align-self: flex-end;
+            background: linear-gradient(145deg, $color-primary-500, $color-primary-600);
+            border: 1px solid rgba($color-primary-700, 0.2);
+            border-bottom-right-radius: $radius-sm;
+
+            p {
+                color: $color-neutral-0;
+            }
+
+            .biz-msg__bubble-meta {
+                color: rgba($color-neutral-0, 0.82);
+            }
+
+            .biz-msg__bubble-tag {
+                background: rgba($color-neutral-0, 0.2);
+                color: $color-neutral-0;
+            }
+        }
+    }
+
+    &__bubble-meta {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: $space-2;
+        margin-top: $space-2;
+        font-size: 0.6875rem;
+        color: $color-text-tertiary;
+    }
+
+    &__bubble-tag {
+        padding: 1px $space-2;
+        border-radius: $radius-full;
+        font-size: 0.625rem;
+        font-weight: $font-weight-semibold;
+        background: $color-neutral-100;
+        color: $color-text-secondary;
+    }
+
+    &__composer {
+        display: flex;
+        align-items: flex-end;
+        gap: $space-3;
+        padding: $space-4 $space-5;
+        border-top: 1px solid $color-border-light;
+        background: $color-neutral-0;
+
+        textarea {
+            flex: 1;
+            min-height: 44px;
+            max-height: 120px;
+            resize: none;
+            padding: $space-3 $space-4;
+            border: 1px solid $color-border;
+            border-radius: $radius-xl;
+            background: $color-neutral-50;
+            font-family: inherit;
+            font-size: $font-size-sm;
+            line-height: 1.45;
+            color: $color-text-primary;
+            transition:
+                border-color $transition-base,
+                background-color $transition-base,
+                box-shadow $transition-base;
+
+            &::placeholder {
+                color: $color-text-tertiary;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: rgba($color-primary-400, 0.85);
+                background: $color-neutral-0;
+                box-shadow: 0 0 0 3px rgba($color-primary-400, 0.15);
+            }
+        }
+    }
+
+    &__send {
+        flex-shrink: 0;
+        padding: $space-3 $space-5;
+        border: none;
+        border-radius: $radius-full;
+        background: $color-primary-600;
+        font-family: inherit;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-neutral-0;
+        cursor: pointer;
+        transition:
+            background-color $transition-base,
+            transform $transition-base,
+            opacity $transition-base;
+
+        &:hover:not(:disabled) {
+            background: $color-primary-700;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+    }
+}

@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id           String   @id
+  email        String   @unique
+  passwordHash String
+  role         String
+  displayName  String
+  createdAt    DateTime @default(now())
+
+  parent   Parent?
+  business Business?
+}
+
+model Parent {
+  id                 String   @id
+  accountId          String   @unique
+  firstName          String
+  lastName           String
+  phone              String   @default("")
+  city               String   @default("")
+  favoriteVenueSlugs String[]
+  createdAt          DateTime @default(now())
+
+  account       Account        @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  children      Child[]
+  reservations  Reservation[]
+  conversations Conversation[]
+  reviews       Review[]
+}
+
+model Child {
+  id        String   @id
+  parentId  String
+  name      String
+  birthYear Int
+  interests String[]
+  allergies String[]
+
+  parent Parent @relation(fields: [parentId], references: [id], onDelete: Cascade)
+}
+
+model Business {
+  id          String   @id
+  accountId   String   @unique
+  companyName String
+  contactName String
+  phone       String   @default("")
+  city        String   @default("")
+  venueSlugs  String[]
+  plan        String   @default("osnovna")
+  createdAt   DateTime @default(now())
+
+  account       Account        @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  venues        Venue[]
+  reservations  Reservation[]
+  conversations Conversation[]
+  reviews       Review[]
+}
+
+model Venue {
+  id           String  @id
+  slug         String  @unique
+  name         String
+  city         String
+  district     String
+  rating       Float
+  reviewCount  Int
+  priceFrom    Int
+  capacity     Int
+  ageFrom      Int
+  ageTo        Int
+  tags         String[]
+  featured     Boolean @default(false)
+  privateParty Boolean @default(true)
+  businessId   String?
+
+  business     Business?     @relation(fields: [businessId], references: [id])
+  reservations Reservation[]
+}
+
+model Reservation {
+  id            String   @id
+  parentId      String
+  businessId    String
+  venueSlug     String
+  childName     String
+  date          String
+  time          String
+  packageName   String
+  guestCount    Int
+  totalPriceEur Int
+  depositEur    Int
+  status        String
+  addons        Json     @default("[]")
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  parent   Parent   @relation(fields: [parentId], references: [id])
+  business Business @relation(fields: [businessId], references: [id])
+  venue    Venue    @relation(fields: [venueSlug], references: [slug])
+}
+
+model Conversation {
+  id             String   @id
+  parentId       String
+  businessId     String
+  venueSlug      String
+  venueName      String
+  updatedAt      DateTime
+  unreadByParent Int      @default(0)
+
+  parent   Parent    @relation(fields: [parentId], references: [id])
+  business Business  @relation(fields: [businessId], references: [id])
+  messages Message[]
+}
+
+model Message {
+  id             String   @id
+  conversationId String
+  sender         String
+  text           String
+  sentAt         DateTime
+  status         String?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id             String    @id
+  businessId     String
+  venueSlug      String
+  parentId       String
+  parentName     String
+  rating         Int
+  comment        String
+  createdAt      DateTime  @default(now())
+  ownerReplyText String?
+  ownerReplyAt   DateTime?
+
+  business Business @relation(fields: [businessId], references: [id])
+  parent   Parent   @relation(fields: [parentId], references: [id])
+}
