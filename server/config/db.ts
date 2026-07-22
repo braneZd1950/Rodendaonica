@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+import type { MongoMemoryServer } from 'mongodb-memory-server'
 import { env } from './env.js'
 
-let memoryServer: { stop: () => Promise<void> } | null = null
+let memoryServer: MongoMemoryServer | null = null
 
 export function isMemoryDatabase() {
   return env.mongoUri === 'memory'
